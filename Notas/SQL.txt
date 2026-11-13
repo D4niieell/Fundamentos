@@ -1,0 +1,9 @@
+MySQL 
+-> SGBG (Sistema de Gerenciamento de Banco de Dados)
+ -> SQLServer -> Microsoft 
+              -> oracle
+  -> MariaDB
+   -> PostGress
+    -> SQLite
+
+Móvel BD -> Internet <- ServerBD

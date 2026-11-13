@@ -1,0 +1,63 @@
+Esse código foi escrito na linguagem Dart e serve para demonstrar o funcionamento de funções com parâmetros e o uso de números aleatórios.
+Aqui está a explicação detalhada de cada parte do código:
+
+1. Importação da Biblioteca
+dart
+import 'dart:math';
+Use o código com cuidado.
+• O que faz: 
+    Importa a biblioteca de matemática padrão do Dart.
+• Por que está aí: 
+    Ela é necessária para usarmos a classe Random, que gera os números aleatórios mais adiante no código.
+
+2. A Função Principal (main)
+dart
+void main() { ... }
+Use o código com cuidado.
+
+• O que faz: 
+    É o ponto de entrada do programa. Todo código Dart precisa de uma função main para saber por onde começar a execução.
+Dentro da main, acontecem três ações principais:
+
+• Soma com valores fixos:
+dart
+int resultado = somar(2, 3);
+print(resultado);
+Use o código com cuidado.
+Chama a função somar passando os números 2 and 3. O resultado (5) é guardado na variável resultado e impresso na tela.
+
+• Soma aleatória direta no texto:
+dart
+print("O resultado da soma aleatória é: ${SomarNumerosAleatoriosPrint()}");
+Use o código com cuidado.
+Chama a função SomarNumerosAleatoriosPrint(). O Dart executa a função, pega o retorno dela e o insere direto dentro do texto usando a interpolação ${}.
+
+• Soma aleatória usando variável:dart
+var somaAleatoria = SomarNumerosAleatoriosPrint();
+print('Usando a váriavel somaAleatoria: $somaAleatoria');
+Use o código com cuidado.
+Chama a mesma função de números aleatórios novamente (gerando outro resultado), guarda esse valor na variável somaAleatoria e depois exibe no terminal.
+
+3. As Funções Personalizadas
+Função somar
+dart
+int somar(int n1, int n2) {
+  return n1 + n2;
+}
+Use o código com cuidado.
+• O que faz: 
+    É uma função simples e previsível. Ela recebe dois números inteiros (n1 e n2), soma os dois e retorna (return) o resultado inteiro (int).
+
+Função SomarNumerosAleatoriosPrint
+dart
+int SomarNumerosAleatoriosPrint() {
+  int n1 = Random().nextInt(11);
+  int n2 = Random().nextInt(11);
+  return n1 + n2;
+}
+Use o código com cuidado.
+• O que faz: Gera dois números surpresa e os soma.
+• Como funciona: 
+    O método Random().nextInt(11) gera um número inteiro aleatório entre 0 e 10 (o número 11 é exclusivo, ou seja, não entra). Ela faz isso para n1 e n2, soma ambos e retorna o resultado.
+• Nota de boas práticas: 
+    Apesar do nome da função conter "Print", ela não roda nenhum comando print() internamente; ela apenas calcula e retorna o valor.

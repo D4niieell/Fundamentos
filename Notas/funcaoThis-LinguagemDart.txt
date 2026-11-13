@@ -1,0 +1,101 @@
+# Análise do código Dart
+
+Esse código mostra o básico de **classes, construtores e instanciação de objetos** em Dart.
+
+* A classe `Produto`
+
+```dart
+class Produto {
+  String nome = '';
+  double preco = 0;
+```
+
+Aqui são declarados dois **atributos** (campos) da classe:
+- `nome`, do tipo `String`, iniciado com string vazia.
+- `preco`, do tipo `double`, iniciado com `0`.
+
+Eles precisam de um valor inicial por causa do **null safety** do Dart: tipos como `String` e `double` não podem ser `null`, então o compilador exige que sejam inicializados (ou que você use `late` ou `?`).
+
+* O construtor
+
+```dart
+Produto(String nome, double preco) {
+  this.nome = nome;
+  this.preco = preco;
+}
+```
+
+É um construtor com o mesmo nome da classe. Ele recebe dois parâmetros, `nome` e `preco`, e os atribui aos atributos do objeto.
+
+O uso de **`this`** é necessário porque o parâmetro tem o mesmo nome do atributo. Sem ele, `nome = nome` apenas atribuiria o parâmetro a ele mesmo:
+- `this.nome` → o atributo do objeto
+- `nome` → o parâmetro recebido
+
+* A função `main`
+
+```dart
+var nomeProduto = 'Chocolate';
+var valorProduto = 2.50;
+Produto p1 = Produto(nomeProduto, valorProduto);
+```
+
+- `var` faz o Dart **inferir o tipo**: `nomeProduto` vira `String` e `valorProduto` vira `double`.
+- `Produto(nomeProduto, valorProduto)` chama o construtor e cria o objeto `p1`. Em Dart não é preciso usar `new` (é opcional e raramente usado).
+
+* Os comentários
+
+Os comentários mostram alternativas:
+
+```dart
+// Produto p1 = Produto('Chocolate', 2.50);
+```
+Passar os valores diretamente, sem variáveis intermediárias.
+
+```dart
+// p1.nome = 'chocolate';
+// p1.preco = 2.50;
+```
+Criar o objeto e depois alterar os atributos manualmente. Isso só seria possível com um construtor sem parâmetros, ou alterando depois da criação.
+
+```dart
+// this.nome = nomeProduto;
+```
+Um comentário solto dentro da classe. Isso **não funcionaria** ali, pois `this.nome = ...` é uma instrução, e instruções só podem ficar dentro de métodos ou construtores, não direto no corpo da classe.
+
+* Forma mais idiomática em Dart
+
+Dart tem um atalho chamado **parâmetros formais de inicialização**, que dispensa o corpo do construtor e o `this.` manual:
+
+```dart
+class Produto {
+  String nome;
+  double preco;
+
+  Produto(this.nome, this.preco);
+}
+```
+
+Fica mais curto e, como os atributos são sempre inicializados pelo construtor, não precisam mais de valor padrão. Você também pode usar **parâmetros nomeados**:
+
+```dart
+class Produto {
+  String nome;
+  double preco;
+
+  Produto({required this.nome, required this.preco});
+}
+
+void main() {
+  var p1 = Produto(nome: 'Chocolate', preco: 2.50);
+}
+```
+
+* Observação final
+
+O código cria o objeto `p1`, mas **não faz nada com ele**, não há `print` nem uso dos dados. Para ver o resultado, você poderia adicionar:
+
+```dart
+print('${p1.nome} custa R\$ ${p1.preco}');
+// Chocolate custa R$ 2.5
+```
+

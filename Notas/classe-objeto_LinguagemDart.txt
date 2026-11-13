@@ -1,0 +1,12 @@
+Classe vs. Objetos
+"forma" vs. "objeto pronto" 
+
+Classe(Forma): a "planta" da estrutura do código.
+Objeto Pronto: o produto final e os atributos do código.
+
+Classes vs. Objetos
+
+* A classe são a maneira que temos de informar como queremos que nosso objeto funcional.
+* A o criarmos uma classe podemos especificar os métodos e os atributos que os objetos possuirão.
+* Os métodos são as ações.
+* Os atributos são as características. 

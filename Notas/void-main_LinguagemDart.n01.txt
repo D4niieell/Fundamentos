@@ -1,0 +1,72 @@
+Vou explicar o código por partes, incluindo alguns problemas que ele tem (principalmente na parte final).
+
+- Parte 1 — Números
+```dart
+int n1 = 3;
+double n2 = (-5.67).abs();
+String n3 = '12.765';
+
+print(n1 + n2 + double.parse(n3));
+```
+- `n2` usa `.abs()` para pegar o valor absoluto de -5.67, resultando em `5.67`.
+- `n3` é uma String, então `double.parse(n3)` converte o texto `'12.765'` para o número `12.765`.
+- Em Dart, dá para somar `int + double` diretamente (o resultado vira `double`). Então isso imprime `3 + 5.67 + 12.765 = 21.435`.
+
+- Parte 2 — Strings
+```dart
+String s1 = "Boa ";
+String s2 = "Noite ";
+
+print(s1.toLowerCase() + s2.toUpperCase() + '!!!');
+```
+- `toLowerCase()` deixa `s1` minúsculo: `"boa "`.
+- `toUpperCase()` deixa `s2` maiúsculo: `"NOITE "`.
+- Concatena tudo com `+`, resultando em: `boa NOITE !!!`
+
+- Parte 3 — Booleanos
+```dart
+bool estaFrio = true;
+bool estaChovendo = false;
+
+print(estaFrio ^ !estaChovendo);
+```
+- `^` é o operador **XOR** (ou exclusivo): resulta `true` só quando os dois lados são diferentes.
+- `!estaChovendo` inverte `false` para `true`.
+- Então é `true ^ true`, que dá **`false`** (já que os dois lados são iguais).
+
+- Parte 4 — Aqui tem erros ⚠️
+
+```dart
+const PI = 3.141516;
+var entradaUsuario = stdout.write("Informe o raio: ");
+
+var area = PI * (entradaUsuario * entradaUsuario);
+
+print ("A area do circuito é: " + area);
+```
+
+Essa parte tem **três problemas**:
+
+1. **`stdout.write(...)` não lê nada do usuário** — ela só *imprime* o texto na tela e retorna `void` (nada). Para ler uma entrada do usuário em Dart, o certo é usar `stdin.readLineSync()`. Além disso, seria necessário `import 'dart:io';` no topo do arquivo para usar `stdout`/`stdin`.
+
+2. Como `entradaUsuario` acaba sendo `void`, a linha `PI * (entradaUsuario * entradaUsuario)` **não compila** — não dá para multiplicar um `void`.
+
+3. Mesmo que `area` fosse um número, `"texto" + area` **não funciona em Dart**: o operador `+` de String exige outra String do lado direito, não um `double`. Seria necessário converter com `.toString()` ou usar interpolação de string (`'$area'`).
+
+- Versão corrigida dessa parte:
+```dart
+import 'dart:io';
+
+void main() {
+  // ... resto do código ...
+
+  const PI = 3.141516;
+  stdout.write("Informe o raio: ");
+  String? entrada = stdin.readLineSync();
+  double raio = double.parse(entrada!);
+
+  var area = PI * (raio * raio);
+
+  print("A area do circuito é: $area");
+}
+```

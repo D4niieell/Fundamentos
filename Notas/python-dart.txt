@@ -1,0 +1,64 @@
+Vou explicar o código por partes. Importante notar: tudo está comentado (`//` ou `/* */`) exceto o último bloco — então, se você rodar esse arquivo, **só o último `main()` vai executar**.
+
+* Blocos comentados (não executam, mas valem entender)
+
+* Bloco 1:
+```dart
+main(){
+    print('Olá TIPI 1 - Estou conhecendo o Dart!!!');
+    print('New York Knick é campeão da NBA 2026!');
+    {
+        print('Michael Jordan é o GOAT do basquete!');
+    }
+}
+```
+Aqui faltou o `void` antes de `main()` (função sem retorno). As chaves `{ }` soltas dentro do `main` criam um **bloco de escopo** — não é um `if`, `for` nem nada, é só um agrupamento de código. Serve pra mostrar que variáveis declaradas ali dentro morrem ao sair do bloco. Como não há nenhuma variável nova nele, aqui só teve efeito de organização visual.
+
+* Bloco 2:
+```dart
+void main(List args) {
+    print('Lista de argumentos');
+    print(args);
+}
+```
+Mostra que `main` pode receber argumentos de linha de comando como uma `List`.
+
+* Bloco 3:
+```dart
+int a = 3;
+String b = "O valor da soma é: ";
+double c = 3.1415;
+
+print(a);          // 3
+print(c);          // 3.1415
+print(a + c);      // 8.1415  (int + double = double, Dart permite)
+print(b);          // O valor da soma é:
+print(b + (a + c).toString()); // concatena string + número convertido em texto
+```
+Ponto-chave: 
+    `int + double` funciona e vira `double`. Mas `b + (a + c)` **não funcionaria direto**, porque Dart não deixa somar `String` com `num` — por isso usa `.toString()` pra converter o resultado numérico em texto antes de concatenar.
+
+* Bloco 4: mesma ideia, mas usando `var` (tipagem inferida automaticamente pelo valor atribuído, sem precisar escrever `int`, `String`, `double`).
+
+O comentário `/* - Booleano - dynamic */` parece ser só uma anotação sua (ou do professor) lembrando dos próximos tipos a estudar — `bool` e `dynamic` — mas não tem código correspondente ainda.
+
+* Código que realmente executa
+
+```dart
+void main() {
+    int n1 = 3;
+    double n2 = (-5.67).abs();
+    print(n1 + n2);
+}
+```
+
+- `n1` é `int`, valor `3`.
+- `n2` é `double`: pega `-5.67` e aplica `.abs()` (valor absoluto), resultando em `5.67`.
+- `print(n1 + n2)` soma `3 + 5.67`.
+
+* Saída no console:
+```
+8.67
+```
+
+Isso porque, de novo, somar `int` com `double` em Dart produz automaticamente um `double`.

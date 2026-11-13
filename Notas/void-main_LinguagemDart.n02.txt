@@ -1,0 +1,60 @@
+Claro! Vamos por partes:
+
+- 1. Números
+
+```dart
+int n1 = 3;
+double n2 = (-5.67).abs();
+String n3 = '12.765';
+```
+
+- `n1` é um inteiro (`int`) valendo `3`.
+- `n2` usa o método `.abs()`, que retorna o **valor absoluto** de um número (sem sinal). Como `-5.67` é negativo, `n2` fica `5.67` (um `double`).
+- `n3` é uma **String** (texto) contendo `'12.765'` — não é um número de verdade ainda, é só texto.
+
+```dart
+print(n1 + n2 + double.parse(n3));
+```
+
+- `double.parse(n3)` converte a string `'12.765'` em um número `double` de verdade: `12.765`.
+- Depois soma tudo: `3 + 5.67 + 12.765 = 21.435`.
+- Em Dart, é possível somar `int` com `double` diretamente — o resultado da soma vira `double`.
+- **Saída:** `21.435`
+
+- 2. Strings (texto)
+
+```dart
+String s1 = "Boa ";
+String s2 = "Noite ";
+
+print(s1.toLowerCase() + s2.toUpperCase() + '!!!');
+```
+
+- `.toLowerCase()` deixa o texto todo em minúsculas: `"Boa "` → `"boa "`
+- `.toUpperCase()` deixa o texto todo em maiúsculas: `"Noite "` → `"NOITE "`
+- O `+` entre strings faz **concatenação** (junta os textos).
+- **Saída:** `boa NOITE !!!`
+
+- 3. Booleanos (lógica)
+
+```dart
+bool estaFrio = true;
+bool estaChovendo = false;
+
+print(estaFrio && estaChovendo);
+```
+
+- `&&` é o operador **"E" lógico** — só retorna `true` se **ambos** os lados forem `true`.
+- Aqui: `true && false` → `false`.
+- **Saída:** `false`
+
+---
+
+- Resumo da saída completa no console:
+```
+21.435
+boa NOITE !!!
+false
+```
+
+Quer que eu monte esse código como um artefato interativo (por exemplo, para você testar mudando os valores)?

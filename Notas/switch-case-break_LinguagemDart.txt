@@ -1,0 +1,79 @@
+Claro! Aqui está o código com comentários explicando cada linha:
+
+```dart
+// Importa a biblioteca 'dart:io', que permite entrada e saída de dados
+// (ler do teclado com stdin e escrever no terminal com stdout)
+import 'dart:io';
+
+// Importa a biblioteca 'dart:math', usada para operações matemáticas
+// (neste código ela não é utilizada, então poderia ser removida)
+import 'dart:math';
+
+// Função principal: é o ponto de partida de todo programa Dart
+void main() {
+  // Exibe a mensagem no terminal SEM pular linha (diferente do print),
+  // para que o usuário digite a resposta na mesma linha
+  stdout.write('Digite um número de 1 a 7: ');
+
+  // Lê o que o usuário digitou no teclado (retorna uma String):
+  // - stdin.readLineSync() lê uma linha de texto
+  // - o '!' garante ao Dart que o valor não será nulo
+  // - int.parse() converte o texto para um número inteiro
+  // - o resultado é guardado na variável 'numero'
+  int numero = int.parse(stdin.readLineSync()!);
+
+  // Estrutura 'switch': compara o valor de 'numero' com cada 'case'
+  // e executa o bloco correspondente
+  switch(numero){
+    // Se 'numero' for igual a 1
+    case 1:
+      print('Domingo'); // Exibe "Domingo" no terminal
+      break;            // Encerra o switch para não executar os outros cases
+    // Se 'numero' for igual a 2
+    case 2:
+      print('Segunda'); // Exibe "Segunda"
+      break;            // Sai do switch
+    // Se 'numero' for igual a 3
+    case 3:
+      print('Terça');   // Exibe "Terça"
+      break;            // Sai do switch
+    // Se 'numero' for igual a 4
+    case 4:
+      print('Quarta');  // Exibe "Quarta"
+      break;            // Sai do switch
+    // Se 'numero' for igual a 5
+    case 5:
+      print('Quinta');  // Exibe "Quinta"
+      break;            // Sai do switch
+    // Se 'numero' for igual a 6
+    case 6:
+      print('Sexta');   // Exibe "Sexta"
+      break;            // Sai do switch
+    // Se 'numero' for igual a 7
+    case 7:
+      print('Sábado');  // Exibe "Sábado"
+      break;            // Sai do switch
+    // 'default' é executado quando NENHUM case anterior corresponde
+    // ao valor (ou seja, o número não está entre 1 e 7)
+    default:
+    print('número Inválido'); // Avisa que o número digitado é inválido
+  }
+
+  // Esta linha fica fora do switch, então sempre é executada,
+  // independentemente do número digitado
+  print('FIM!!!');
+}
+```
+
+**Resumo do funcionamento:**
+
+1. O programa pede um número de 1 a 7.
+2. Lê e converte a entrada para inteiro.
+3. O `switch` verifica qual dia da semana corresponde ao número e o imprime.
+4. Se o número for diferente de 1 a 7, mostra "número Inválido".
+5. Por fim, sempre exibe "FIM!!!".
+
+**Observações úteis:**
+
+- O `import 'dart:math'` não está sendo usado, então pode ser removido sem afetar nada.
+- Se o usuário digitar algo que não seja um número (como "abc"), o `int.parse` lançará um erro. Para evitar isso, você pode usar `int.tryParse`, que retorna `null` em vez de gerar erro.

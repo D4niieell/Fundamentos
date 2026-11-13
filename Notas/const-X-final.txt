@@ -1,0 +1,11 @@
+const x final 
+
+const 
+ -> Não pode ser alterado
+  -> Valor é definido na compilação
+   -> pi = 3.14
+
+final 
+ -> Não pode ser alterado
+  -> valor definido durante a execução
+   -> Classes

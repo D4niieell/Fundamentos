@@ -1,0 +1,59 @@
+Esse código está em **Dart** (a linguagem usada no Flutter). Vou explicar por partes.
+
+* A função `main()`
+
+```dart
+void main() {
+  saudacao(nome: 'João', idade: 33);
+  saudacao(idade: 29, nome: 'Maria');
+}
+```
+
+É o ponto de entrada do programa, onde a execução começa. Ela chama a função `saudacao` duas vezes, passando os argumentos **pelo nome** (`nome:` e `idade:`). Por isso, na segunda chamada a ordem está invertida (`idade` antes de `nome`) e funciona normalmente.
+
+* A função `saudacao`
+
+```dart
+saudacao({String? nome, int? idade}) {
+  print("Olá $nome, você não parece ter $idade anos!!!");
+}
+```
+
+- **`{ ... }` nos parâmetros**: 
+    as chaves definem **parâmetros nomeados**. Na chamada, você escreve `nome: valor`, e a ordem não importa.
+- **`String?` e `int?`**: 
+    o `?` indica que o tipo é **anulável (nullable)**, ou seja, o valor pode ser `null`. Isso é necessário porque parâmetros nomeados são opcionais por padrão e, se você não passar nada, o valor será `null`.
+- **`$nome` e `$idade`**: 
+    é a **interpolação de strings**, que insere o valor das variáveis dentro do texto.
+- **`print(...)`**: 
+    exibe o texto no console.
+- A função não declara tipo de retorno. O Dart aceita isso, mas o ideal seria escrever `void saudacao(...)`, já que ela não retorna nada.
+
+* Saída no console
+
+```
+Olá João, você não parece ter 33 anos!!!
+Olá Maria, você não parece ter 29 anos!!!
+```
+
+* Detalhe importante
+
+Como os parâmetros são opcionais, esta chamada também seria válida:
+
+```dart
+saudacao();
+```
+
+E imprimiria: `Olá null, você não parece ter null anos!!!`
+
+Para evitar isso, use `required`, que obriga quem chama a passar os valores:
+
+```dart
+void saudacao({required String nome, required int idade}) {
+  print("Olá $nome, você não parece ter $idade anos!!!");
+}
+```
+
+Assim, o `?` deixa de ser necessário e o compilador avisa se você esquecer algum argumento.
+
+Se quiser, posso mostrar também como funcionam parâmetros posicionais e valores padrão (`idade = 18`, por exemplo).

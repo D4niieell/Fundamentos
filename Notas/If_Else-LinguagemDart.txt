@@ -1,0 +1,54 @@
+```dart
+// Importa a biblioteca 'dart:math', que contém a classe Random usada para gerar números aleatórios
+import 'dart:math';
+
+// Função principal: é o ponto de entrada do programa, onde a execução começa
+void main() {
+  // Cria um objeto Random e gera um número inteiro aleatório de 0 a 10 (o limite 11 é exclusivo)
+  // 'var' faz o Dart inferir automaticamente que 'nota' é do tipo int
+  var nota = Random().nextInt(11);
+
+  // Exibe no console a nota sorteada, usando interpolação de string ($nota) para inserir o valor
+  print('Nota selecionada foi $nota');
+
+  // Bloco de código comentado (não é executado), usado apenas como teste
+  // if (true) {
+  //   print("Teste de IF");
+  //   print("Teste do IF - 2");
+  // }
+
+  // Primeira condição: se a nota for maior ou igual a 9, executa o bloco abaixo
+  if (nota >= 9) {
+    // Exibe a mensagem para notas 9 e 10
+    print('Quadro de honra!!!');
+    // Se a primeira condição falhou, testa: nota maior ou igual a 7 (ou seja, 7 ou 8)
+  } else if (nota >= 7) {
+    // Exibe a mensagem de aprovação
+    print('Aluno aprovado! :)');
+    // Se as anteriores falharam, testa: nota maior ou igual a 5 (ou seja, 5 ou 6)
+  } else if (nota >= 5) {
+    // Exibe a mensagem de recuperação simples
+    print('Aluno em recuperação!');
+    // Se as anteriores falharam, testa: nota maior ou igual a 4 (ou seja, exatamente 4)
+  } else if (nota >= 4) {
+    // Exibe a mensagem de recuperação com trabalho adicional
+    print('Aluno em recuperação + Trabalho');
+    // Se nenhuma condição anterior for verdadeira (notas de 0 a 3), executa este bloco
+  } else {
+    // Exibe a mensagem de reprovação
+    print('Reprovado! :(');
+  }
+  // Fim do bloco if/else if/else: apenas UM dos blocos é executado, o primeiro cuja condição for verdadeira
+}
+// Fim da função main: o programa termina aqui
+```
+
+**Resumo da lógica das faixas de nota:**
+
+| Nota | Resultado |
+|------|-----------|
+| 9 – 10 | Quadro de honra |
+| 7 – 8 | Aprovado |
+| 5 – 6 | Recuperação |
+| 4 | Recuperação + Trabalho |
+| 0 – 3 | Reprovado |

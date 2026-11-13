@@ -1,0 +1,61 @@
+* Explicação do código
+
+Este programa em Dart faz duas perguntas ao usuário pelo terminal e decide se ele deve ficar em casa ou sair.
+
+* Passo a passo
+
+1. Importação**
+```dart
+import 'dart:io';
+```
+Importa a biblioteca `dart:io`, que fornece `stdin` (entrada do teclado) e `stdout` (saída no terminal).
+
+2. Primeira pergunta**
+```dart
+stdout.write('Está chovendo? (s/n)');
+bool estaChovendo = stdin.readLineSync() == 's';
+```
+- `stdout.write` exibe o texto **sem pular linha** (diferente do `print`), então o usuário digita logo depois da pergunta.
+- `stdin.readLineSync()` espera o usuário digitar algo e apertar Enter, retornando o texto como `String?` (pode ser `null`).
+- `== 's'` compara o texto digitado com `'s'`. O resultado é um `bool`: `true` se o usuário digitou exatamente `s`, e `false` para qualquer outra coisa (`n`, `S`, `sim`, vazio etc.).
+
+3. Segunda pergunta**
+```dart
+stdout.write('Está frio? (s/n)');
+bool estaFrio = stdin.readLineSync() == 's';
+```
+Mesma lógica, agora para saber se está frio.
+
+4. A decisão**
+```dart
+String resultado = estaChovendo && estaFrio ? "Ficar em casa" : "Sair!!";
+```
+Aqui há dois conceitos combinados:
+- `&&` é o operador **E** lógico: só dá `true` se as duas condições forem verdadeiras.
+- `condição ? valorSeVerdadeiro : valorSeFalso` é o **operador ternário**, um `if/else` em uma linha.
+
+Ou seja: se estiver chovendo **e** frio, `resultado` recebe `"Ficar em casa"`. Caso contrário, recebe `"Sair!!"`.
+
+5. Saída**
+```dart
+print(resultado);
+```
+Mostra o resultado na tela.
+
+* Tabela de resultados
+
+| Chovendo | Frio | Resultado |
+|----------|------|-----------|
+| sim | sim | Ficar em casa |
+|----------|------|-----------|
+| sim | não | Sair!! |
+|----------|------|-----------|
+| não | sim | Sair!! |
+|----------|------|-----------|
+| não | não | Sair!! |
+
+* Observações
+
+- **Só fica em casa se as duas coisas acontecerem.** Se sua intenção for ficar em casa quando *qualquer uma* das condições for verdadeira, troque `&&` por `||` (OU).
+- **Só o `s` minúsculo funciona.** Se o usuário digitar `S`, o programa entende como "não". Para aceitar os dois casos, você pode usar `stdin.readLineSync()?.toLowerCase() == 's'`.
+- **Falta um espaço após o `?`** nas perguntas. Ficaria mais legível como `'Está chovendo? (s/n) '`, para o cursor não colar no texto.

@@ -1,0 +1,58 @@
+Aqui está o código com comentários em cada linha:
+
+```dart
+// Importa a biblioteca 'dart:math', que contém a classe Random (números aleatórios)
+import 'dart:math';
+
+// Função principal: é o ponto de entrada, onde o programa começa a executar
+void main() {
+  // Chama a função passando 100 como máximo; o resultado é gerado, mas descartado
+  qualquerNumero(100);
+
+  // Chama a função novamente e guarda o resultado na variável 'teste'
+  // (o tipo é inferido como int por causa do 'var')
+  var teste = qualquerNumero(100);
+
+  // Imprime no console o número aleatório (entre 0 e 99) guardado em 'teste'
+  print(teste);
+
+  // Chama ImprimirData sem argumentos, então usa os valores padrão: 1/1/1970
+  ImprimirData();
+
+  // Chama ImprimirData passando os 3 argumentos posicionais: dia, mês e ano
+  // Imprime: 1/10/2026 (o zero à esquerda de 01 é ignorado, pois é só o número 1)
+  ImprimirData(01, 10, 2026);
+}
+
+// Função que retorna um int (número inteiro)
+// Os colchetes [] indicam que o parâmetro 'maximo' é opcional e posicional
+// Como não tem tipo declarado, 'maximo' é do tipo dynamic
+int qualquerNumero([maximo]) {
+  // Cria um objeto Random e sorteia um inteiro de 0 até (maximo - 1)
+  // O 'return' devolve esse valor para quem chamou a função
+  return Random().nextInt(maximo);
+}
+
+// Função sem tipo de retorno declarado (por padrão, será dynamic)
+// Todos os parâmetros são opcionais e posicionais (entre colchetes []),
+// cada um com um valor padrão caso não seja informado
+ImprimirData([int dia = 1, int mes = 1, int ano = 1970])
+  {
+    // Imprime no console a data, usando interpolação de strings ($variavel)
+    // para inserir os valores de dia, mes e ano no texto
+    print('$dia/$mes/$ano');
+  } 
+```
+
+**Pontos de atenção (melhorias opcionais):**
+
+1. **`qualquerNumero` sem argumento dá erro.** Como `maximo` é opcional e não tem valor padrão, chamar `qualquerNumero()` passaria `null` para `nextInt`, causando erro em tempo de execução. Você pode tornar o parâmetro obrigatório ou dar um valor padrão:
+   ```dart
+   int qualquerNumero([int maximo = 100]) {
+     return Random().nextInt(maximo);
+   }
+   ```
+
+2. **Tipo de retorno em `ImprimirData`.** Como ela não retorna nada, o ideal é declarar `void ImprimirData(...)`.
+
+3. **Convenção de nomes.** Em Dart, funções usam `lowerCamelCase`, então o recomendado seria `imprimirData` em vez de `ImprimirData`.

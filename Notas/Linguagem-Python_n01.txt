@@ -1,0 +1,118 @@
+* Como resolver o exercício passo a passo
+
+* 1. Entendendo o que se pede
+
+A função `calculaMedia` precisa:
+
+1. **Receber** três notas (parâmetros);
+2. **Calcular** a média (soma das três dividida por 3);
+3. **Exibir** as três notas;
+4. **Exibir** a média;
+5. **Informar** se o aluno está aprovado (média ≥ 7) ou reprovado.
+
+Ela não precisa retornar nada, só imprimir na tela. Por isso o tipo de retorno é `void`.
+
+* 2. Montando a estrutura
+
+Todo programa Dart começa pela função `main()`, que é o ponto de entrada. Dentro dela você chama `calculaMedia` passando as três notas.
+
+```dart
+void main() {
+  calculaMedia(8.0, 6.5, 7.5);
+}
+```
+
+* 3. Criando a função com parâmetros
+
+Os parâmetros são declarados entre parênteses, com tipo e nome. Como notas podem ter casa decimal (6.5, por exemplo), usamos `double`:
+
+```dart
+void calculaMedia(double nota1, double nota2, double nota3) {
+  // corpo da função
+}
+```
+
+* 4. Calculando a média
+
+Some as notas e divida por 3, guardando o resultado em uma variável:
+
+```dart
+double media = (nota1 + nota2 + nota3) / 3;
+```
+
+Os **parênteses são obrigatórios**. Sem eles, só a `nota3` seria dividida por 3, por causa da precedência dos operadores.
+
+* 5. Exibindo as notas e a média
+
+Use `print()` com **interpolação de strings**, que insere variáveis dentro do texto com `$`:
+
+```dart
+print('Nota 1: $nota1');
+print('Nota 2: $nota2');
+print('Nota 3: $nota3');
+print('Média: ${media.toStringAsFixed(2)}');
+```
+
+- `$nota1` funciona para variáveis simples.
+- `${...}` é necessário quando há uma expressão ou chamada de método dentro.
+- `toStringAsFixed(2)` limita a média a 2 casas decimais (ex.: `7.33` em vez de `7.333333333333333`).
+
+* 6. Verificando aprovação ou reprovação
+
+Use `if / else` com a condição `media >= 7`:
+
+```dart
+if (media >= 7) {
+  print('Situação: Aprovado');
+} else {
+  print('Situação: Reprovado');
+}
+```
+
+* 7. Código completo
+
+```dart
+void main() {
+  calculaMedia(8.0, 6.5, 7.5);
+}
+
+void calculaMedia(double nota1, double nota2, double nota3) {
+  double media = (nota1 + nota2 + nota3) / 3;
+
+  print('Nota 1: $nota1');
+  print('Nota 2: $nota2');
+  print('Nota 3: $nota3');
+  print('Média: ${media.toStringAsFixed(2)}');
+
+  if (media >= 7) {
+    print('Situação: Aprovado');
+  } else {
+    print('Situação: Reprovado');
+  }
+}
+```
+
+**Saída esperada:**
+
+```
+Nota 1: 8.0
+Nota 2: 6.5
+Nota 3: 7.5
+Média: 7.33
+Situação: Aprovado
+```
+
+## 8. Testando outros casos
+
+Troque os valores na chamada dentro do `main()` para testar:
+
+- `calculaMedia(5.0, 6.0, 4.5);` → média 5.17, **Reprovado**
+- `calculaMedia(7.0, 7.0, 7.0);` → média 7.00, **Aprovado** (testa o limite do `>=`)
+
+## Dicas extras
+
+- **Ordem das funções:** em Dart, `calculaMedia` pode ficar antes ou depois do `main()`.
+- **Uso de `int`:** se você passar notas inteiras como `8`, o Dart aceita em parâmetros `double`, mas o valor será exibido como `8.0`.
+- **Desafio opcional:** peça as notas pelo teclado usando `import 'dart:io';` e `stdin.readLineSync()`, convertendo com `double.parse(...)`.
+
+Se quiser, posso mostrar a versão com entrada de dados pelo teclado.

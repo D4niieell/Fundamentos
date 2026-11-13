@@ -1,0 +1,61 @@
+Claro! Vou explicar o código parte por parte.
+
+- Operadores aritméticos
+
+```dart
+int a = 7;
+int b = 3;
+int resultado = a + b;
+print(resultado);
+```
+Aqui `a + b` soma os dois valores: `7 + 3 = 10`, então `print(resultado)` exibe **10**.
+
+```dart
+// a += 5;
+// a = a + 5;
+// a -= 5;
+// a *= 5;
+a %= 5;
+print(a);
+```
+As três primeiras linhas estão comentadas (não executam), servindo só como exemplos de operadores de atribuição combinados:
+- `a += 5` equivale a `a = a + 5`
+- `a -= 5` equivale a `a = a - 5`
+- `a *= 5` equivale a `a = a * 5`
+
+A linha que **realmente executa** é `a %= 5`, que equivale a `a = a % 5`. O operador `%` é o **módulo** (resto da divisão).
+
+Como `a` ainda vale `7` nesse ponto: `7 % 5 = 2` (7 dividido por 5 dá quociente 1 e resto 2).
+
+Então `print(a)` exibe **2**.
+
+- Operadores relacionais
+
+Esses operadores comparam dois valores e sempre retornam um `bool` (`true` ou `false`):
+
+```dart
+print(3 > 2);   // true  → 3 é maior que 2
+print(3 >= 2);  // true  → 3 é maior ou igual a 2
+print(3 <= 2);  // false → 3 não é menor ou igual a 2
+print(3 < 2);   // false → 3 não é menor que 2
+print(3 != 2);  // true  → 3 é diferente de 2
+print(3 == 2);  // false → 3 não é igual a 2
+print(3 == 3);  // true  → 3 é igual a 3
+print(3 == '3'); // false → compara int com String
+```
+
+O último caso é o mais interessante: `3 == '3'` compara um **número inteiro** (`3`) com uma **String** (`'3'`). Mesmo "parecendo iguais" visualmente, são tipos diferentes em Dart, então o resultado é **false**. O Dart até pode mostrar um aviso do analisador (algo como "tipos não relacionados"), mas o código compila e roda normalmente.
+
+- Resumo da saída no console:
+```
+10
+2
+true
+true
+false
+false
+true
+false
+true
+false
+```

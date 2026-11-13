@@ -1,0 +1,12 @@
+main () {
+ var cpf = leitura de texto; -> 300.983.138-27 -> digito verificador
+ 
+ login = cpf                  -> CNPJ: 14 digitos
+ if = verificador
+
+} -> valida compra
+	cpf
+
+Função:
+-> Busca da compra:
+  -> CPF -> if, else, for...

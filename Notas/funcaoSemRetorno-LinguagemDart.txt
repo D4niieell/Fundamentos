@@ -1,0 +1,72 @@
+```dart
+// Importa a biblioteca dart:math, que fornece a classe Random para gerar números aleatórios
+import 'dart:math';
+
+// Função principal: ponto de entrada do programa Dart
+void main() {
+  // Declara a variável inteira 'a' e atribui o valor 5
+  int a = 5;
+  // Declara a variável inteira 'b' e atribui o valor 6
+  int b = 6;
+  // Chama somaComPrint com 'a' e 'b'; ela imprime o texto e depois o resultado (11)
+  somaComPrint(a, b);
+
+  // Imprime o texto com interpolação: "A soma de 5 - 6 = "
+  print('A soma de $a - $b = ');
+  // Imprime o resultado de a + b, ou seja, 11
+  print(a + b);
+
+  // Declara a variável inteira 'c' e atribui o valor 10
+  int c = 10;
+  // Declara a variável inteira 'd' e atribui o valor 20
+  int d = 20;
+  // Chama somaComPrint com 'c' e 'd'; ela imprime o texto e depois o resultado (30)
+  somaComPrint(c, d);
+
+  // Imprime o texto com interpolação: "A soma de 10 + 20 = "
+  print('A soma de $c + $d = ');
+  // Imprime o resultado de c + d, ou seja, 30
+  print(c + d);
+}
+
+// Define a função somaComPrint, que recebe dois inteiros (n1 e n2)
+// Sem tipo de retorno declarado, o Dart assume 'dynamic'
+somaComPrint(int n1, int n2) {
+  // Imprime o texto com os valores dos parâmetros interpolados
+  print('A soma de $n1 + $n2 = ');
+  // Soma os dois parâmetros e imprime o resultado
+  print(n1 + n2);
+}
+
+// Define uma função que não retorna valor (void) e não recebe parâmetros
+// Observação: ela nunca é chamada dentro de main(), então não é executada
+void somaDoisNumerosAleatoriosPrint() {
+  // Gera um inteiro aleatório entre 0 e 10 (nextInt(11) exclui o 11) e guarda em n1
+  int n1 = Random().nextInt(11);
+  // Gera outro inteiro aleatório entre 0 e 10 e guarda em n2
+  int n2 = Random().nextInt(11);
+
+  // Imprime o texto com os dois números sorteados interpolados
+  print('A soma de dois números aleatórios é: $n1 + $n2 = ');
+  // Soma os dois números sorteados e imprime o resultado
+  print(n1 + n2);
+}
+```
+
+**Saída do programa** (a função aleatória não é chamada, então não aparece):
+```
+A soma de 5 + 6 = 
+11
+A soma de 5 - 6 = 
+11
+A soma de 10 + 20 = 
+30
+A soma de 10 + 20 = 
+30
+```
+
+**Observações:**
+- `somaDoisNumerosAleatoriosPrint()` está definida, mas nunca é chamada. Para executá-la, adicione `somaDoisNumerosAleatoriosPrint();` dentro de `main()`.
+- Agora que `somaComPrint` já imprime o texto "A soma de ...", os `print` logo após cada chamada em `main()` ficaram redundantes e repetem a mesma informação.
+- O texto `'A soma de $a - $b = '` continua com `-` no lugar de `+`, o que pode ser um descuido.
+- Seria melhor declarar `void somaComPrint(int n1, int n2)`, já que a função não retorna valor.

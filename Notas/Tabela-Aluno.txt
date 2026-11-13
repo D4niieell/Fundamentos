@@ -1,0 +1,10 @@
+Tabela Aluno 
+
+Nome - Endereço - CEP - idade
+Camila  ...       ...    ...
+João    ...       ...    ...
+Daniel  ...       ...    ...
+
+Nome -> String
+CEP -> real, int.
+idade -> int

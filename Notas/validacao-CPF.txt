@@ -1,0 +1,155 @@
+* Validador de CPF em Dart, passo a passo
+
+Vou explicar a lógica primeiro e depois montar o código completo, para você entender cada peça.
+
+* Passo 1: Limpar o CPF
+
+O usuário pode digitar `529.982.247-25` ou `52998224725`. A função precisa trabalhar sempre com o formato limpo.
+
+```dart
+cpf = cpf.replaceAll('.', '').replaceAll('-', '');
+```
+
+Resultado: `"52998224725"`.
+
+* Passo 2: Verificar se tem 11 dígitos
+
+```dart
+if (cpf.length != 11) return false;
+```
+
+Se não tiver 11 caracteres, já é inválido e a função encerra aqui (o `return false` interrompe tudo).
+
+* Passo 3: Rejeitar dígitos todos iguais
+
+CPFs como `111.111.111-11` passam no cálculo matemático, mas são inválidos por regra. Uma forma elegante de checar:
+
+```dart
+if (cpf.split('').every((d) => d == cpf[0])) return false;
+```
+
+- `split('')` transforma a string em uma lista de caracteres.
+- `every(...)` retorna `true` se **todos** os elementos forem iguais ao primeiro.
+
+* Passo 4: Calcular o primeiro dígito verificador
+
+Pegamos os 9 primeiros dígitos e multiplicamos pelos pesos **10, 9, 8, ..., 2**.
+
+A ideia do loop: o índice `i` vai de 0 a 8, e o peso é `10 - i`.
+
+| i | dígito | peso (10 - i) |
+|---|--------|---------------|
+| 0 | 5 | 10 |
+| 1 | 2 | 9 |
+| 2 | 9 | 8 |
+| ... | ... | ... |
+| 8 | 7 | 2 |
+
+```dart
+int soma = 0;
+for (int i = 0; i < 9; i++) {
+  soma += int.parse(cpf[i]) * (10 - i);
+}
+```
+
+Depois aplicamos a regra:
+
+```dart
+int resto = soma % 11;
+int digito1 = 11 - resto;
+if (digito1 >= 10) digito1 = 0;
+```
+
+No exemplo: `295 % 11 = 9`, então `11 - 9 = 2`.
+
+* Passo 5: Calcular o segundo dígito verificador
+
+Agora usamos **10 dígitos** (os 9 originais + o primeiro dígito verificador) e pesos de **11 até 2**.
+
+Note que o padrão é o mesmo do passo 4, só muda o número de dígitos (10) e o peso inicial (11):
+
+```dart
+soma = 0;
+for (int i = 0; i < 10; i++) {
+  soma += int.parse(cpf[i]) * (11 - i);
+}
+resto = soma % 11;
+int digito2 = 11 - resto;
+if (digito2 >= 10) digito2 = 0;
+```
+
+Aqui usamos `cpf[i]` até o índice 9, que é exatamente o primeiro dígito verificador **que veio no CPF digitado**. Como vamos comparar depois, se ele estiver errado, o primeiro dígito já vai falhar na comparação.
+
+No exemplo: `347 % 11 = 6`, então `11 - 6 = 5`.
+
+* Passo 6: Comparar com os dígitos reais
+
+Os dois últimos dígitos do CPF estão nas posições 9 e 10:
+
+```dart
+return digito1 == int.parse(cpf[9]) && digito2 == int.parse(cpf[10]);
+```
+
+O `&&` garante que **os dois** precisam bater para retornar `true`.
+
+* Código completo
+
+```dart
+void main() {
+  List<String> testes = [
+    "529.982.247-25", // válido
+    "52998224725",    // válido, sem pontuação
+    "529.982.247-24", // inválido (dígito errado)
+    "111.111.111-11", // inválido (todos iguais)
+    "123",            // inválido (tamanho)
+  ];
+
+  for (String cpf in testes) {
+    if (validarCPF(cpf)) {
+      print("$cpf -> CPF válido!");
+    } else {
+      print("$cpf -> CPF inválido!");
+    }
+  }
+}
+
+bool validarCPF(String cpf) {
+  // 1. Remove pontuação
+  cpf = cpf.replaceAll('.', '').replaceAll('-', '');
+
+  // 2. Verifica o tamanho
+  if (cpf.length != 11) return false;
+
+  // 3. Rejeita dígitos todos iguais
+  if (cpf.split('').every((d) => d == cpf[0])) return false;
+
+  // 4. Primeiro dígito verificador
+  int soma = 0;
+  for (int i = 0; i < 9; i++) {
+    soma += int.parse(cpf[i]) * (10 - i);
+  }
+  int resto = soma % 11;
+  int digito1 = 11 - resto;
+  if (digito1 >= 10) digito1 = 0;
+
+  // 5. Segundo dígito verificador
+  soma = 0;
+  for (int i = 0; i < 10; i++) {
+    soma += int.parse(cpf[i]) * (11 - i);
+  }
+  resto = soma % 11;
+  int digito2 = 11 - resto;
+  if (digito2 >= 10) digito2 = 0;
+
+  // 6. Compara com os dígitos informados
+  return digito1 == int.parse(cpf[9]) && digito2 == int.parse(cpf[10]);
+}
+```
+
+* Pontos de atenção!!!
+
+- **Letras no CPF:** se alguém passar `"abc.def.ghi-jk"`, o `int.parse` lançaria uma exceção. Para deixar mais robusto, você pode adicionar uma checagem antes: `if (!RegExp(r'^\d{11}$').hasMatch(cpf)) return false;` (isso substitui a checagem de tamanho do passo 2).
+- **Por que `11 - resto` pode dar 10 ou 11?** Se o resto for 0, dá 11; se for 1, dá 10. Nos dois casos a regra manda usar 0.
+- **Ordem das validações:** faça as checagens baratas primeiro (tamanho, dígitos iguais) para evitar cálculo desnecessário.
+
+Se quiser, posso mostrar uma versão que evita repetir o loop (uma função auxiliar `calcularDigito`) ou explicar algum trecho com mais detalhe.

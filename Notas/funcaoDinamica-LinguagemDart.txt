@@ -1,0 +1,37 @@
+Esse código está escrito na linguagem Dart (usada no framework Flutter). A principal função dele é mostrar como criar uma função flexível que junta (concatena) dois valores, independentemente de eles serem números ou textos.
+Abaixo, explico os pontos principais do código de forma simples:
+1. A função concatenar
+dart
+String concatenar(dynamic a , b) {
+  print((a.toString() + b.toString()));
+  return a.toString() + b.toString();
+}
+Use o código com cuidado.
+• dynamic a, b: 
+    O termo dynamic significa que as variáveis a e b podem receber qualquer tipo de dado (int, double, String, etc.). Como b não teve o tipo especificado, o Dart automaticamente o trata como dynamic também.
+• .toString(): 
+    Esse método transforma qualquer valor (como o número 1) em texto ('1'). Isso é necessário porque o Dart não permite somar um número com um texto diretamente.
+• +: 
+    Quando usado entre textos, o sinal de + serve para juntar (concatenar) as strings.
+• return: 
+    A função faz duas coisas: ela imprime o resultado na tela com o print e também devolve esse texto para quem chamou a função.
+
+2. A execução no main()
+O programa executa os seguintes passos ordenadamente:
+• Passo 1: 
+    String retorno = concatenar(1, 9);
+Invoca a função passando os números 1 e 9. Dentro da função, eles viram '1' e '9', são juntados e a função imprime 19. Depois, ela retorna esse valor para a variável retorno.
+• Passo 2: 
+    print("O retorno com a concatenação e: $retorno");
+Imprime o texto principal usando a variável que guardou o resultado anterior. O console mostrará: O retorno com a concatenação e: 19.
+• Passo 3: 
+    concatenar('Boa ', 'Noite');
+Invoca a função novamente, mas agora passando dois textos (Strings). A função junta os dois e imprime Boa Noite. Como o comando não guardou o return em nenhuma variável, o valor devolvido é descartado.
+
+💻 O resultado final no console
+Se você rodar esse código, a saída será exatamente esta:
+text
+19
+O retorno com a concatenação e: 19
+Boa Noite
+Use o código com cuidado.

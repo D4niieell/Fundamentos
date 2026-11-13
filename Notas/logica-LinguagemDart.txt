@@ -1,0 +1,76 @@
+A lógica de programação em Dart baseia-se em conceitos universais de algoritmos aplicados a uma linguagem moderna, estruturada e desenvolvida pelo Google. Compreender esses fundamentos é o primeiro passo para construir aplicativos com o framework [Flutter](https://flutter.dev/). [1, 2, 3, 4] 
+Abaixo estão os pilares práticos da lógica estruturados na sintaxe do Dart.
+------------------------------
+1. Variáveis e Tipagem
+Dart permite que você declare variáveis definindo o tipo explicitamente ou deixando que a própria linguagem faça a inferência automática. [5] 
+
+void main() {
+  // Inferência automática de tipo (o Dart entende que é uma String)
+  var nome = 'Dart'; 
+  
+  // Declaração explícita de tipos
+  int idade = 15;
+  double altura = 1.75;
+  bool programador = true;
+  
+  print('Nome: $nome, Idade: $idade'); // Saída de dados
+}
+
+2. Estruturas de Decisão (Condicionais)
+Servem para o programa tomar caminhos diferentes baseados em uma condição lógica. [6, 7] 
+
+void main() {
+  int nota = 8;
+
+  if (nota >= 7) {
+    print('Aprovado!');
+  } else if (nota >= 5) {
+    print('Recuperação.');
+  } else {
+    print('Reprovado.');
+  }
+}
+
+3. Estruturas de Repetição (Loops)
+Utilizadas quando você precisa executar o mesmo bloco de código várias vezes. [6] 
+
+void main() {
+  // Loop 'for' - ideal quando você sabe o número de repetições
+  for (int i = 1; i <= 3; i++) {
+    print('Contagem: $i');
+  }
+
+  // Loop 'while' - ideal enquanto uma condição for verdadeira
+  int energia = 3;
+  while (energia > 0) {
+    print('Correndo...');
+    energia--;
+  }
+}
+
+4. Coleções (Listas)
+Uma lista agrupa vários valores em uma única variável sob o mesmo tipo. [6] 
+
+void main() {
+  List<String> tecnologias = ['Dart', 'Flutter', 'Firebase'];
+  
+  // Adicionando um item
+  tecnologias.add('Git');
+  
+  // Percorrendo a lista com a lógica integrada do Dart
+  for (var tech in tecnologias) {
+    print('Tecnologia: $tech');
+  }
+}
+
+5. Funções
+As funções ajudam a isolar blocos de código com tarefas específicas, tornando a lógica reutilizável. [6, 8] 
+
+// Função que recebe parâmetros e retorna um valor do tipo String
+String saudar(String nome do usuario) {
+  return 'Olá, $nome do usuario! Bem-vindo ao Dart.';
+}
+void main() {
+  String mensagem = saudar('Carlos');
+  print(mensagem); 
+}

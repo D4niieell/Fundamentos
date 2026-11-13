@@ -1,0 +1,58 @@
+Claro! Esse código em Dart mostra três estruturas de dados bem comuns: **List**, **Map** e **Set**. Vamos por partes.
+
+- 1. List (Lista)
+
+```dart
+var alunos = ['Israel', 'Kauã', 'Jonathan', 'Wellington'];
+```
+
+Uma lista é uma coleção **ordenada** de itens, onde cada item tem um índice (posição), começando do zero.
+
+- `print(alunos);` → imprime a lista inteira: `[Israel, Kauã, Jonathan, Wellington]`
+- `print(alunos[2]);` → acessa o item pelo índice usando colchetes `[]`. Índice 2 é o **terceiro** item (0=Israel, 1=Kauã, 2=Jonathan) → imprime `Jonathan`
+- `print(alunos.elementAt(3));` → outra forma de acessar por índice, agora usando o método `.elementAt()`. Índice 3 → `Wellington`
+- `print(alunos.length);` → imprime o tamanho da lista → `4`
+- `print(alunos is List);` → verifica se `alunos` é do tipo `List` → `true`
+
+- 2. Map (Mapa)
+
+```dart
+var telefone = {
+  'Stefany': '+55 (11) 78947-4564',
+  ...
+};
+```
+
+Um Map guarda dados em pares de **chave: valor** (aqui, nome → telefone).
+
+- `print(telefone['Iara']);` → busca o valor pela **chave** (não por índice numérico) → imprime o telefone da Iara
+- `print(telefone['Adenilson']);` → mesma lógica, retorna o telefone dele
+- `print(telefone.length);` → quantidade de pares chave-valor → `4`
+- `print(telefone.keys);` → retorna um iterável só com as **chaves** (os nomes)
+- `print(telefone);` → imprime o mapa inteiro no formato `{chave: valor, ...}`
+- `print(telefone is Map);` → confirma o tipo → `true`
+
+- 3. Set (Conjunto)
+
+```dart
+var times = {'Chicago Bulls', 'Boston Celtics', 'New York Knicks'};
+```
+
+Um Set é uma coleção de itens **únicos** (não permite duplicados) e, ao contrário da List, **não tem índice** — ou seja, você não acessa por posição.
+
+- `print(times.first);` → imprime o primeiro elemento do conjunto
+- `print(times.last);` → imprime o último elemento
+- `print(times);` → imprime o conjunto inteiro entre chaves `{}`
+- `print(times.length);` → quantidade de elementos → `3`
+
+* Resumo rápido
+
+| Estrutura | Sintaxe | Acesso | Permite duplicados? | Tem ordem/índice? |
+|---|---|---|---|---|
+| `List` | `[ ]` | por índice `[i]` | Sim | Sim |
+| `Map` | `{chave: valor}` | por chave `[chave]` | Chaves não, valores sim | Chaves não garantidas* |
+| `Set` | `{ }` | não tem índice | Não | Não garantida* |
+
+*Na prática, `LinkedHashMap`/`LinkedHashSet` (implementação padrão do Dart) preservam a ordem de inserção, mas isso não é uma garantia formal do contrato de `Map`/`Set`.
+
+Um detalhe curioso: `Map` e `Set` usam a mesma sintaxe com chaves `{ }`! O Dart diferencia pelo conteúdo — se tiver `chave: valor`, é `Map`; se for só uma lista de valores, é `Set`. Por isso um `{}` vazio é interpretado como `Map` por padrão (para `Set` vazio, você precisa declarar `<tipo>{}` ou usar `Set()`).

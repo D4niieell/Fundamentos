@@ -1,0 +1,97 @@
+* Principais elementos da linguagem Dart
+
+Dart não tem "tags" como HTML. Interpretei como **palavras-reservadas (keywords)** e **anotações (@)**, e incluí as funções e métodos mais usados.
+
+* 1. Função principal
+
+```dart
+void main() {
+  print('Olá, mundo!');
+}
+```
+
+`main()` é o ponto de entrada de todo programa Dart. Pode receber argumentos: `void main(List<String> args)`.
+
+* 2. Funções e métodos mais usados
+
+| Função / método | Uso |
+|---|---|
+| `print()` | Exibe texto no console |
+| `.toString()` | Converte para String |
+| `int.parse()` / `double.parse()` / `tryParse()` | Converte String em número |
+| `.length` | Tamanho de String, List, Map |
+| `.add()` / `.remove()` | Adiciona/remove itens de uma lista |
+| `.map()` | Transforma cada elemento |
+| `.where()` | Filtra elementos |
+| `.forEach()` | Executa ação para cada item |
+| `.reduce()` / `.fold()` | Acumula valores |
+| `.toList()` / `.toSet()` | Converte coleções |
+| `.contains()` | Verifica se contém um valor |
+| `.sort()` | Ordena uma lista |
+| `.split()` / `.join()` | Divide/une Strings |
+| `.substring()` / `.trim()` | Manipulação de String |
+| `.toUpperCase()` / `.toLowerCase()` | Caixa do texto |
+
+```dart
+var numeros = [1, 2, 3, 4, 5];
+var pares = numeros.where((n) => n.isEven).map((n) => n * 2).toList();
+print(pares); // [4, 8]
+```
+
+* 3. Palavras-reservadas (keywords) principais
+
+**Variáveis e tipos:** `var`, `final`, `const`, `late`, `dynamic`, `void`, `int`, `double`, `String`, `bool`, `num`
+
+**Controle de fluxo:** `if`, `else`, `switch`, `case`, `default`, `for`, `while`, `do`, `break`, `continue`, `return`
+
+**Orientação a objetos:** `class`, `extends`, `implements`, `with`, `mixin`, `abstract`, `interface`, `enum`, `extension`, `this`, `super`, `new`, `static`, `factory`, `get`, `set`, `sealed`, `base`
+
+**Tratamento de erros:** `try`, `catch`, `on`, `finally`, `throw`, `rethrow`, `assert`
+
+**Assincronismo:** `async`, `await`, `async*`, `sync*`, `yield`, `Future`, `Stream`
+
+**Null safety:** `?` (nulável), `!` (assume não nulo), `??` (valor padrão), `?.` (acesso seguro), `??=`, `required`
+
+**Módulos:** `import`, `export`, `library`, `part`, `as`, `show`, `hide`, `deferred`
+
+* 4. Anotações (metadata com @)
+
+| Anotação | Função |
+|---|---|
+| `@override` | Indica que um método sobrescreve o da superclasse |
+| `@deprecated` / `@Deprecated('msg')` | Marca algo como obsoleto |
+| `@pragma('vm:...')` | Dicas ao compilador |
+| `@immutable` | Indica classe imutável (pacote `meta`) |
+| `@required` | Versão antiga de `required` (hoje é keyword) |
+| `@visibleForTesting` | Visível apenas para testes (pacote `meta`) |
+
+* 5. Tags em comentários de documentação
+
+Dart usa `///` para documentação, com Markdown e referências entre colchetes:
+
+```dart
+/// Soma dois números.
+///
+/// Veja também [subtrair].
+int somar(int a, int b) => a + b;
+```
+
+* 6. Exemplo reunindo vários conceitos
+
+```dart
+class Pessoa {
+  final String nome;
+  int? idade;
+
+  Pessoa({required this.nome, this.idade});
+
+  @override
+  String toString() => 'Pessoa($nome, ${idade ?? "sem idade"})';
+}
+
+Future<void> main() async {
+  final p = Pessoa(nome: 'Ana');
+  await Future.delayed(Duration(seconds: 1));
+  print(p);
+}
+```

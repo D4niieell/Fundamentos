@@ -1,0 +1,80 @@
+Claro! Esse código em Dart sorteia uma nota de 0 a 10 e mostra uma mensagem diferente dependendo do valor sorteado.
+
+* Imports
+
+```dart
+import 'dart:io';
+import 'dart:math';
+```
+
+- `dart:math` é o que realmente é usado aqui: ele fornece a classe `Random`.
+- `dart:io` serve para entrada e saída (ler do teclado, arquivos etc.), mas **não é usado** neste código. Pode ser removido sem problema.
+
+* Sorteando a nota
+
+```dart
+var nota = Random().nextInt(11);
+```
+
+- `Random()` cria um gerador de números aleatórios.
+- `nextInt(11)` sorteia um inteiro de **0 até 10** (o limite superior, 11, é excluído).
+- `var` deixa o Dart inferir o tipo da variável, que aqui será `int`.
+
+```dart
+print('A nota sorteado foi $nota');
+```
+
+Imprime o valor sorteado. O `$nota` é uma *interpolação de string*: o valor da variável é inserido no texto. (Só um detalhe: o correto em português seria "sorteada", já que "nota" é feminino.)
+
+* O `switch`
+
+```dart
+switch(nota) {
+  case 10:
+    print('Quadro de honra!!!');
+    break;
+  case 5:
+    print('Recuperação');
+    break;
+  case 4:
+    print('Recuperação + Trabalho');
+    break;
+  default:
+    print('Nota inválida!!!');
+}
+```
+
+O `switch` compara o valor de `nota` com cada `case`, de cima para baixo:
+
+| Nota sorteada | Saída |
+|---|---|
+| 10 | `Quadro de honra!!!` |
+| 5 | `Recuperação` |
+| 4 | `Recuperação + Trabalho` |
+| qualquer outra (0, 1, 2, 3, 6, 7, 8, 9) | `Nota inválida!!!` |
+
+- O `break` encerra o `switch` depois que o caso correspondente é executado.
+- O `default` roda quando nenhum `case` bate.
+
+* Fim
+
+```dart
+print('FIM!!!');
+```
+
+Está fora do `switch`, então **sempre** é executado, independente da nota.
+
+* Exemplo de execução
+
+```
+A nota sorteado foi 4
+Recuperação + Trabalho
+FIM!!!
+```
+
+* Observação
+
+A lógica do `default` está um pouco estranha: 
+    notas como 7 ou 8 são válidas (são notas normais, só não têm tratamento especial), mas o programa diz "Nota inválida". Em um programa real, você provavelmente trataria faixas de valores, por exemplo, com `if/else`, ou usaria o `default` para algo como "Aprovado".
+
+Se quiser, posso mostrar como reescrever isso usando `if/else` ou a sintaxe nova de `switch` do Dart 3.
